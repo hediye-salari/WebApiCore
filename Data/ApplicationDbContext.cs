@@ -23,11 +23,11 @@ namespace Data
         // راه اول برای تعریف DbContext
         //short key: override OnConfiguring
 
-        ////protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        ////{
-        ////    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MyApiDb;Integrated Security=true");
-        ////    base.OnConfiguring(optionsBuilder);
-        ////}
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MyApiDb;Integrated Security=true");
+        //    base.OnConfiguring(optionsBuilder);
+        //}
 
         //-------------------------------------------------------------------------------------
         //متد  زیر وظیفه ساخت جدول از روی مدل ها را دارد به جای تعریف 
