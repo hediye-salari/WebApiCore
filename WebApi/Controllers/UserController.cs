@@ -21,7 +21,19 @@ namespace MyApi.Controllers
         {
             this.userRepository = userRepository;
         }
+        [HttpGet]
+        public async Task<ActionResult<List<User>>> Get(CancellationToken cancellationToken)
+        {
+            var users = await userRepository.TableNoTracking.ToListAsync(cancellationToken);
+            return users;
+        }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<User>> Get(int id, CancellationToken cancellationToken)
+        {
+            var user = await userRepository.GetByIdAsync(cancellationToken, id);
+            return user;
+        }
 
     }
 }
