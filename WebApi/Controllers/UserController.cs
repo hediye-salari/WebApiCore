@@ -44,6 +44,11 @@ namespace MyApi.Controllers
         {
             var updateUser = await userRepository.GetByIdAsync(cancellationToken, id);
 
+
+            if (updateUser == null)
+                return NotFound();
+
+ 
             updateUser.UserName= user.UserName;
             updateUser.PasswordHash= user.PasswordHash;
             updateUser.FullName= user.FullName;
