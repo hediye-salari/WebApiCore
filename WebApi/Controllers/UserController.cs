@@ -40,7 +40,7 @@ namespace MyApi.Controllers
             await userRepository.AddAsync(user, cancellationToken);
         }
         [HttpPut]
-        public async Task<IActionResult> Update(int id, User user, CancellationToken cancellationToken)
+        public async Task<ActionResult> Update(int id, User user, CancellationToken cancellationToken)
         {
             var updateUser = await userRepository.GetByIdAsync(cancellationToken, id);
 
@@ -60,6 +60,12 @@ namespace MyApi.Controllers
             await userRepository.UpdateAsync(updateUser, cancellationToken);
             return Ok();
         }
+        public async Task<ActionResult> Delete(int id, User user, CancellationToken cancellationToken)
+        {
+            var DeleteUser = await userRepository.GetByIdAsync(cancellationToken, id);
+            await userRepository.DeleteAsync(DeleteUser, cancellationToken);
+            return Ok();
+        }
 
-    }
+        }
 }
