@@ -34,6 +34,27 @@ namespace MyApi.Controllers
             var user = await userRepository.GetByIdAsync(cancellationToken, id);
             return user;
         }
+        [HttpPost]
+        public async Task Create(User user, CancellationToken cancellationToken)
+        {
+            await userRepository.AddAsync(user, cancellationToken);
+        }
+        [HttpPut]
+        public async Task<IActionResult> Update(int id, User user, CancellationToken cancellationToken)
+        {
+            var updateUser = await userRepository.GetByIdAsync(cancellationToken, id);
+
+            updateUser.UserName= user.UserName;
+            updateUser.PasswordHash= user.PasswordHash;
+            updateUser.FullName= user.FullName;
+            updateUser.Age= user.Age;
+            updateUser.Gender= user.Gender;
+            updateUser.IsActive= user.IsActive;
+            updateUser.LastLoginDate= user.LastLoginDate;
+
+            await userRepository.UpdateAsync(updateUser, cancellationToken);
+            return Ok();
+        }
 
     }
 }
