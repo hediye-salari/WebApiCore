@@ -11,10 +11,18 @@ namespace WebFramwork.Api
     {
         public bool IsSuccess { get; set; }
         public ApiResultStatusCode StatusCode { get; set; }
+
+        public string Message { get; set; }
+    }
+    //اینجوری هم زمانی که دیتا داریم و هم نداریم را کنترل میکنیم 
+    public class ApiResult<TData> : ApiResult
+       where TData : class
+    {
+
+        public TData Data { get; set; }
     }
 
-
-    public enum ApiResultStatusCode
+        public enum ApiResultStatusCode
     {
         [Display(Name = "عملیات با موفقیت انجام شد")]
         Success = 0,
