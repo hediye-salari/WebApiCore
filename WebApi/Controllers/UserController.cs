@@ -40,7 +40,7 @@ namespace MyApi.Controllers
             await userRepository.AddAsync(user, cancellationToken);
         }
         [HttpPut]
-        public async Task<ActionResult> Update(int id, User user, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update(int id, User user, CancellationToken cancellationToken)
         {
             var updateUser = await userRepository.GetByIdAsync(cancellationToken, id);
 
