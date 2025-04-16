@@ -1,4 +1,5 @@
-﻿using Data.Repositories;
+﻿using Common;
+using Data.Repositories;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using WebFramwork.Api;
 
 
 namespace MyApi.Controllers
@@ -22,10 +24,20 @@ namespace MyApi.Controllers
             this.userRepository = userRepository;
         }
         [HttpGet]
-        public async Task<ActionResult<List<User>>> Get(CancellationToken cancellationToken)
+        public async Task<ApiResult<List<User>>> Get(CancellationToken cancellationToken)
         {
             var users = await userRepository.TableNoTracking.ToListAsync(cancellationToken);
             return users;
+            //return new ApiResult<List<User>>
+
+            //{
+            //    IsSuccess = true,
+            //    StatusCode  =ApiResultStatusCode.Success,
+            //    Message="عملیات با موفقیت انجام شد ",
+            //    Data = users
+
+
+            //};
         }
 
         [HttpGet("{id:int}")]
@@ -33,6 +45,7 @@ namespace MyApi.Controllers
         {
             var user = await userRepository.GetByIdAsync(cancellationToken, id);
             return user;
+            return NotFound
         }
         [HttpPost]
         public async Task Create(User user, CancellationToken cancellationToken)
@@ -48,7 +61,7 @@ namespace MyApi.Controllers
             if (updateUser == null)
                 return NotFound();
 
- 
+
             updateUser.UserName= user.UserName;
             updateUser.PasswordHash= user.PasswordHash;
             updateUser.FullName= user.FullName;
@@ -67,5 +80,5 @@ namespace MyApi.Controllers
             return Ok();
         }
 
-        }
+    }
 }
